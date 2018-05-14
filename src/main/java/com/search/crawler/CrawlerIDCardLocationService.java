@@ -22,6 +22,7 @@ public class CrawlerIDCardLocationService {
 			result.setMsg("【idCard】必须是不小于6位的数字");
 			return result;
 		}
+
 		return null;
 	}
 
