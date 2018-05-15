@@ -36,7 +36,7 @@ public class SearchController {
 		if (crawlerResult.getCode() == CrawlerResult.SUCCESS_CODE) {
 			return Res.ok(crawlerResult.getMsg()).put("result", crawlerResult.getCrawlerResult());
 		}
-		return Res.error(crawlerResult.getMsg());
+		return Res.error(-1, crawlerResult.getMsg());
 	}
 
 }

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class IndexController {
 
-	@RequestMapping("/hello")
+	@RequestMapping("/start")
 	public String hello() {
-		return "Hello Spring Boot !";
+		return "Hello,Spring Boot !";
 	}
 }
