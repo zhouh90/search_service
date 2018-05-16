@@ -21,9 +21,6 @@ import com.search.utils.CommonUtils;
 @Service
 public class CrawlerIDCardLocationService {
 
-//	@Autowired
-//	private IDCardLocationMapper idCardLocationMapper;
-
 	@Autowired
 	private IDCardLoationRepository idCardLoationRepository;
 
@@ -35,7 +32,7 @@ public class CrawlerIDCardLocationService {
 			return result;
 		}
 		List<IDCardLoation> list = idCardLoationRepository.findByIdcard(idCard);
-		if (!CollectionUtils.isEmpty(list)) {
+		if (!CollectionUtils.isEmpty(list) && list.get(0) != null) {
 			result.setCode(CrawlerResult.SUCCESS_CODE);
 			result.setMsg("查询成功");
 			result.setCrawlerResult(list.get(0));
