@@ -1,12 +1,15 @@
 package com.search.crawler;
 
+import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.search.beans.bizs.IDCardLoation;
 import com.search.beans.result.crawler.CrawlerResult;
-import com.search.mapper.IDCardLocationMapper;
+import com.search.dao.IDCardLoationRepository;
 import com.search.utils.CommonUtils;
 
 /**
@@ -18,8 +21,11 @@ import com.search.utils.CommonUtils;
 @Service
 public class CrawlerIDCardLocationService {
 
+//	@Autowired
+//	private IDCardLocationMapper idCardLocationMapper;
+
 	@Autowired
-	private IDCardLocationMapper idCardLocationMapper;
+	private IDCardLoationRepository idCardLoationRepository;
 
 	public CrawlerResult searchIDCardLocation(String idCard) {
 		CrawlerResult result = new CrawlerResult();
@@ -28,11 +34,11 @@ public class CrawlerIDCardLocationService {
 			result.setMsg("【idCard】必须是不小于6位的数字");
 			return result;
 		}
-		IDCardLoation idCardLoation = idCardLocationMapper.getByIDCard(idCard);
-		if (idCardLoation != null) {
+		List<IDCardLoation> list = idCardLoationRepository.findByIdcard(idCard);
+		if (!CollectionUtils.isEmpty(list)) {
 			result.setCode(CrawlerResult.SUCCESS_CODE);
 			result.setMsg("查询成功");
-			result.setCrawlerResult(idCardLoation);
+			result.setCrawlerResult(list.get(0));
 			return result;
 		}
 		result.setCode(CrawlerResult.FAIL_CODE);
